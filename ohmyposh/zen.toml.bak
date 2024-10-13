@@ -1,0 +1,70 @@
+version = 2
+final_space = true
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
+
+[palette]
+  black = '#000000'
+  grey = '#313143'
+  white = '#ffffff'
+  orange = '#F7B285'
+  green = '#A6E5A5'
+  tourquoise = '#96E4D4'
+  blue = '#85B5FF'
+  pink = '#F2C3E7'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  [[blocks.segments]]
+    type = 'session'
+    style = 'diamond'
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = ' {{ .UserName }} '
+    background = 'p:grey'
+    foreground = 'p:white'
+
+  [[blocks.segments]]
+    type = 'path'
+    style = 'powerline'
+    powerline_symbol = ''
+    template = ' {{ .Path }} '
+    background = 'p:orange'
+    foreground = 'p:black'
+
+    [blocks.segments.properties]
+      style = 'full'
+
+  [[blocks.segments]]
+    type = 'session'
+    style = 'diamond'
+    powerline_symbol = ''
+    template = ' ㅤ'
+    background = 'p:green'
+    foreground = 'p:black'
+
+  [[blocks.segments]]
+    type = 'session'
+    style = 'diamond'
+    powerline_symbol = ''
+    template = '  ㅤ'
+    background = 'p:tourquoise'
+    foreground = 'p:black'
+
+  [[blocks.segments]]
+    type = 'session'
+    style = 'diamond'
+    powerline_symbol = ''
+    template = '.'
+    background = 'p:blue'
+    foreground = 'p:black'
+
+  [[blocks.segments]]
+    type = 'session'
+    style = 'diamond'
+    powerline_symbol = ''
+    template = '.'
+    background = 'p:pink'
+    foreground = 'p:black'
+
