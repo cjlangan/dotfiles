@@ -30,3 +30,4 @@ waydroid
 cbonsai
 tty-clock 
 arecord
+sptlrx
