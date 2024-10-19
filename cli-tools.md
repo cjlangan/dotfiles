@@ -33,4 +33,4 @@ arecord
 sptlrx
 hyprpicker
 dunst
-
+cal
