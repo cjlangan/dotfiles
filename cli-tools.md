@@ -31,3 +31,6 @@ cbonsai
 tty-clock 
 arecord
 sptlrx
+hyprpicker
+dunst
+
