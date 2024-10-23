@@ -34,3 +34,5 @@ sptlrx
 hyprpicker
 dunst
 cal
+nchat
+discordo
