@@ -40,6 +40,7 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+#setopt correct_all
 
 
 # Completion styling 
@@ -49,11 +50,6 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
 
 
-
-
-
-
-
 # --------------------------------------------------
 #                       EXPORTS
 # --------------------------------------------------
@@ -61,6 +57,13 @@ zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
 export EDITOR=nvim
 export PATH=~/.local/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORMTHEME=kde
+
+
+
+export AI_PROVIDER=duckduckgo #tgpt provider
+
 
 
 # --------------------------------------------------
@@ -78,6 +81,7 @@ alias open='xdg-open'
 alias weather='curl wttr.in'
 alias chatgpt='tgpt --provider duckduckgo -m'
 alias aihelp='source /usr/local/bin/aihelp.sh'
+
 
 # Alias to get directory of a file from fzf and cd's to it
 cds() {

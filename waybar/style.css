@@ -10,7 +10,7 @@
     font-weight: 900;
     border: none;
     min-height: 20px;
-    border-radius: 8px;
+    border-radius: 0px;
 }
 /* ---------modules group--------- */
 
@@ -43,7 +43,7 @@ tooltip {
 
 window#waybar {
     /* background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); */
-    background-color: transparent;
+    background-color: black;
 }
 
 window#waybar.hidden {
@@ -70,7 +70,7 @@ window#waybar.empty #window {
 #workspaces button {
     padding: 0px 5px;
     margin: 5px;
-    border-radius: 6px;
+    border-radius: 0px;
     border: none;
     color: @foreground;
     background-color: @background;
