@@ -36,3 +36,5 @@ dunst
 cal
 nchat
 discordo
+streamlink
+pdftk
