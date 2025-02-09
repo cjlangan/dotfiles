@@ -38,3 +38,5 @@ nchat
 discordo
 streamlink
 pdftk
+nvtop
+ifuse

@@ -1,24 +1,35 @@
--- load defaults i.e lua_lsp
-require("nvchad.configs.lspconfig").defaults()
+local lspconfig = require("lspconfig")
 
-local lspconfig = require "lspconfig"
+-- Extend LSP capabilities for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
--- EXAMPLE
-local servers = { "html", "cssls" }
-local nvlsp = require "nvchad.configs.lspconfig"
+-- Define servers and settings
+local servers = {
+  lua_ls = {
+    settings = {
+      Lua = {
+        completion = { callSnippet = "Replace" },
+      },
+    },
+  },
+  jdtls = {},
+}
 
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
-  }
+-- Setup Mason
+require("mason").setup()
+require("mason-lspconfig").setup({
+  automatic_installation = true,
+  ensure_installed = vim.tbl_keys(servers),
+})
+
+-- Setup each LSP
+for server_name, server_config in pairs(servers) do
+  server_config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server_config.capabilities or {})
+  lspconfig[server_name].setup(server_config)
 end
 
--- configuring single server, example: typescript
--- lspconfig.ts_ls.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
+-- Ensure required tools are installed
+local ensure_installed = vim.tbl_keys(servers)
+vim.list_extend(ensure_installed, { "stylua" })
+require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
