@@ -40,3 +40,4 @@ streamlink
 pdftk
 nvtop
 ifuse
+qalc
