@@ -41,3 +41,4 @@ pdftk
 nvtop
 ifuse
 qalc
+bord + pika-backup
