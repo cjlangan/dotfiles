@@ -41,4 +41,7 @@ pdftk
 nvtop
 ifuse
 qalc
-bord + pika-backup
+borg + pika-backup
+caligula
+typtea
+ytsurf

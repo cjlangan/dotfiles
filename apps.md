@@ -12,9 +12,11 @@ parsec
 krita
 protonvpn
 ryujinx
-dolphin emulator
+dolphin-emu
 gimp
 kdenlive
 riseupvpn
 rnote
 libreoffice
+nwg-look
+showmethekey-gtk
