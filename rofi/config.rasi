@@ -11,4 +11,7 @@ configuration{
     sidebar-mode: false;
 }
 
-@theme "catppuccin-mocha"
+//@theme "catppuccin-mocha"
+
+
+@theme "/home/connor/.local/share/rofi/themes/squared-nord.rasi"

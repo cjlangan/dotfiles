@@ -7,6 +7,26 @@ if [ ! -d "$ZINIT_HOME" ]; then
     git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
+# Auto-start tmux if available, not already in tmux, not over SSH, and in GUI
+# Also kill non default sessions
+if command -v tmux >/dev/null 2>&1; then
+  if [ -z "$TMUX" ] && [ -n "$DISPLAY" ] && [ -z "$SSH_TTY" ]; then
+    clients=$(tmux list-sessions -F "#{session_name}:#{session_attached}" 2>/dev/null | awk -F: '$1 == "default" {print $2}')
+    if [ -z "$clients" ]; then
+      # default does not exist
+      tmux new-session -s default
+    elif [ "$clients" -eq 0 ]; then
+      # default exists and is unattached
+      tmux attach-session -t default
+    else
+      # default exists and is attached elsewhere
+      # start a temporary session that dies when the terminal closes
+      tmux new-session -s tmp-$$ \; set-option destroy-unattached on
+    fi
+    exit
+  fi
+fi
+
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Add in zsh plugins
@@ -62,7 +82,13 @@ export QT_QPA_PLATFORMTHEME=kde
 
 
 
-export AI_PROVIDER=duckduckgo #tgpt provider
+# Telegram Exam reminder Bot Token and chat id
+export BOT_TOKEN='hidden'
+export CHAT_ID="hidden"
+export BOOK_BOT='hidden'
+export YT_API_KEY='hidden'
+export PATH="$HOME/.cargo/bin:$PATH"
+export OPENROUTER_API_KEY='hidden'
 
 
 
@@ -75,20 +101,20 @@ alias la='ls -a'
 alias ll='ls -l'
 alias grep='grep --color=auto'
 
-# Alias to sync ~/shared directory to ~/laptop-backup on home server
-alias server-sync='rclone sync ~/shared server:laptop-backup --links -v --exclude "**/.git/**"'
 alias open='xdg-open'
 alias weather='curl wttr.in'
 alias chatgpt='tgpt --provider duckduckgo -m'
-alias aihelp='source /usr/local/bin/aihelp.sh'
+alias cds='cd && cd $(dirname $(fzf))'
+alias vim='nvim'
 
-
-# Alias to get directory of a file from fzf and cd's to it
-cds() {
-    cd ~
-    local file dir
-    file=$(fzf)
-    dir=$(dirname "$file")
-    cd "$dir"
+# Alias to download a file using optimised settings for speed 
+idm() {
+    aria2c --file-allocation=none -c -x 10 -s 10 -d "$HOME/Downloads/" "$1"
 }
 
+# bun completions
+[ -s "/home/connor/.bun/_bun" ] && source "/home/connor/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

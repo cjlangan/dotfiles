@@ -14,6 +14,10 @@ local servers = {
     },
   },
   jdtls = {},
+  gopls = {},
+  ts_ls = {},
+  clangd = {},
+  pyright = {},
 }
 
 -- Setup Mason

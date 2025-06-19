@@ -57,49 +57,6 @@ return {
     end,
   },
 
-  -- { -- Autoformat
-  --   "stevearc/conform.nvim",
-  --   event = { "BufWritePre" },
-  --   cmd = { "ConformInfo" },
-  --   keys = {
-  --     {
-  --       "<leader>f",
-  --       function()
-  --         require("conform").format({ async = true, lsp_format = "fallback" })
-  --       end,
-  --       mode = "",
-  --       desc = "[F]ormat buffer",
-  --     },
-  --   },
-  --   opts = {
-  --     notify_on_error = false,
-  --     format_on_save = function(bufnr)
-  --       -- Disable "format_on_save lsp_fallback" for languages that don't
-  --       -- have a well standardized coding style. You can add additional
-  --       -- languages here or re-enable it for the disabled ones.
-  --       local disable_filetypes = { c = true, cpp = true }
-  --       local lsp_format_opt
-  --       if disable_filetypes[vim.bo[bufnr].filetype] then
-  --         lsp_format_opt = "never"
-  --       else
-  --         lsp_format_opt = "fallback"
-  --       end
-  --       return {
-  --         timeout_ms = 500,
-  --         lsp_format = lsp_format_opt,
-  --       }
-  --     end,
-  --     formatters_by_ft = {
-  --       lua = { "stylua" },
-  --       -- Conform can also run multiple formatters sequentially
-  --       -- python = { "isort", "black" },
-  --       --
-  --       -- You can use 'stop_after_first' to run the first available formatter from the list
-  --       -- javascript = { "prettierd", "prettier", stop_after_first = true },
-  --     },
-  --   },
-  -- },
-
   { -- Autocompletion
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -216,11 +173,7 @@ return {
     end,
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+  {
     "rose-pine/neovim",
     name = "rose-pine",
     priority = 1000, -- Make sure to load this before all the other start plugins.
@@ -231,14 +184,6 @@ return {
       vim.cmd.hi("Comment gui=none")
     end,
   },
-
-  -- Highlight todo, notes, etc in comments
-  -- {
-  --   "folke/todo-comments.nvim",
-  --   event = "VimEnter",
-  --   dependencies = { "nvim-lua/plenary.nvim" },
-  --   opts = { signs = false },
-  -- },
 
   { -- Collection of various small independent plugins/modules
     "echasnovski/mini.nvim",
@@ -277,42 +222,20 @@ return {
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+
   { -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     main = "nvim-treesitter.configs", -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = {
-        "bash",
-        "c",
-        "diff",
-        "html",
-        "lua",
-        "luadoc",
-        "markdown",
-        "markdown_inline",
-        "query",
-        "vim",
-        "vimdoc",
-      },
+      ensure_installed = { "bash", "c", "diff", "html", "lua", "luadoc", "markdown", "markdown_inline", "query", "vim", "vimdoc", },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
         enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { "ruby" },
       },
-      indent = { enable = true, disable = { "ruby" } },
     },
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 
   -- autopairing of (){}[] etc
@@ -359,32 +282,8 @@ return {
   },
 
   {
-    "vhyrro/luarocks.nvim",
-    priority = 1001, -- this plugin needs to run before anything else
-    opts = {
-      rocks = { "magick" },
-    },
-  },
-
-  {
     "mbbill/undotree",
     lazy = false, -- needs to be explicitly set, because of the keys property
-    keys = {
-      {
-        "<leader>u",
-        vim.cmd.UndotreeToggle,
-        desc = "Toggle undotree",
-      },
-    },
-  },
-
-  {
-    "3rd/image.nvim",
-    ft = { "markdown" },
-    dependencies = { "luarocks.nvim" },
-    config = function()
-      require("configs.image")
-    end,
   },
 
   {
@@ -400,14 +299,100 @@ return {
   },
 
   {
-    "OXY2DEV/markview.nvim",
-    lazy = false
+    "folke/snacks.nvim",
+    ---@type snacks.Config 
+    opts = {
+        image = {}
+    }
   },
 
   {
-    "nvzone/typr",
-    dependencies = "nvzone/volt",
-    opts = {},
-    cmd = { "Typr", "TyprStats" },
+    "mikavilpas/yazi.nvim",
+    event = "VeryLazy",
+    keys = {
+      -- 👇 in this section, choose your own keymappings!
+      {
+        "<leader>y",
+        mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "Open yazi at the current file",
+      },
+      {
+        -- Open in the current working directory
+        "<leader>cw", "<cmd>Yazi cwd<cr>", desc = "Open the file manager in nvim's working directory",
+      },
+      {
+        "<c-up>", "<cmd>Yazi toggle<cr>", desc = "Resume the last yazi session",
+      },
+    },
+    ---@type YaziConfig | {}
+    opts = {
+      -- if you want to open yazi instead of netrw, see below for more info
+      open_for_directories = false,
+      keymaps = {
+        show_help = "<f1>",
+      },
+    },
   },
+
+  {
+    "folke/zen-mode.nvim",
+    opts = {
+	window = {
+            options = {
+                  signcolumn = "no", -- disable signcolumn
+                  number = false, -- disable number column
+                  relativenumber = false, -- disable relative numbers
+                  cursorline = false, -- disable cursorline
+                  cursorcolumn = false, -- disable cursor column
+                  foldcolumn = "0", -- disable fold column
+                  list = false, -- disable whitespace characters
+            }
+	    }
+    }
+  },
+
+  {
+      "OXY2DEV/markview.nvim",
+      lazy = false,
+      opts = {
+          preview = { enable = false }
+      }
+  },
+
+  {
+      "lewis6991/gitsigns.nvim",
+      opts ={}
+  },
+
+  {
+      "christoomey/vim-tmux-navigator",
+      cmd = {
+        "TmuxNavigateLeft",
+        "TmuxNavigateDown",
+        "TmuxNavigateUp",
+        "TmuxNavigateRight",
+        "TmuxNavigatePrevious",
+        "TmuxNavigatorProcessList",
+      },
+      keys = {
+        { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+        { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+        { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+        { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+        { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+      },
+  },
+
+  {
+      "mozanunal/sllm.nvim",
+      dependencies = {
+        "echasnovski/mini.notify",
+        "echasnovski/mini.pick",
+      },
+      config = function()
+        require("sllm").setup({
+          -- your custom options here
+          default_model = "openrouter/mistralai/devstral-small:free"
+        })
+      end,
+  }
 }
