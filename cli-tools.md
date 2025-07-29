@@ -44,4 +44,9 @@ qalc
 borg + pika-backup
 caligula
 typtea
-ytsurf
+binsider
+rainfrog
+yt-x
+spotdl
+fum
+ncdu

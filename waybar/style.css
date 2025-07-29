@@ -17,17 +17,17 @@
 /* css margin: top right bottom left; */
 
 .modules-right {
-    margin: 5px 5px 0 5px;
+    margin: 0 5px 0 0;
     padding: 0;
     background-color: @background;
 }
 .modules-center {
-    margin: 5px 0 0 0;
+    margin: 0 0 0 0;
     padding: 0 0;
     background-color: transparent;
 }
 .modules-left {
-    margin-top: 5px;
+    margin-top: 0;
     margin-left: 5px;
     margin-bottom: 0;
     margin-right: 0;
@@ -69,7 +69,7 @@ window#waybar.empty #window {
 }
 #workspaces button {
     padding: 0px 5px;
-    margin: 5px;
+    margin: 0 5px 5px 0;
     border-radius: 0px;
     border: none;
     color: @foreground;
@@ -110,14 +110,14 @@ window#waybar.empty #window {
 #battery,
 #custom-power {
     padding: 0 5px;
-    margin: 0 4px;
+    margin: 0 2px;
     background-color: @background;
     color: @color15;
     box-shadow: none;
 }
 /*-----------SPECIFIC STYLING-----------*/
 #wireplumber.muted {
-    margin: 4px 3px;
+    margin: 0 3px;
     background-color: @color2;
     color: @background;
 }
@@ -141,7 +141,7 @@ window#waybar.empty #window {
 #custom-reboot,
 #custom-logout {
     padding: 0 15px;
-    margin: 4px 3px;
+    margin: 0 3px;
     background: @color15;
     color: @color0;
     border: none;
