@@ -1,4 +1,5 @@
 vim.o.relativenumber = true
+vim.o.termguicolors = true
 vim.o.breakindent = true
 vim.o.swapfile = false
 vim.o.showmode = false
@@ -20,6 +21,7 @@ vim.pack.add({
     {src = "https://github.com/christoomey/vim-tmux-navigator"},
     {src = "https://github.com/lewis6991/gitsigns.nvim"},
     {src = "https://github.com/vague2k/vague.nvim"},
+    {src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main"},
     {src = "https://github.com/neovim/nvim-lspconfig"},
     {src = "https://github.com/mbbill/undotree"},
     {src = "https://github.com/echasnovski/mini.pick"},
@@ -41,7 +43,13 @@ vim.cmd("set completeopt+=noselect")
 require("grapple").setup({ icons = false })
 require("nvim-autopairs").setup()
 require("mini.pick").setup()
+require("vague").setup({ transparent = true })
 require("oil").setup()
+require'nvim-treesitter'.install { "markdown", "python", "javascript", "java", "c" }
+-- require "nvim-treesitter.configs".setup({
+-- 	ensure_installed = { "svelte", "typescript", "javascript" },
+-- 	highlight = { enable = true }
+-- })
 
 vim.lsp.enable({ "lua_ls", "jdtls", "ts_ls", "clangd", "pyright" })
 vim.cmd("colorscheme vague")
@@ -49,6 +57,7 @@ vim.cmd(":hi statusline guibg=NONE")
 
 vim.keymap.set("n", "<leader>f", ":Pick files<cr>")
 vim.keymap.set("n", "<leader>g", ":Pick grep_live<cr>")
+vim.keymap.set("n", "<leader>h", ":Pick help<cr>")
 vim.keymap.set("n", "<leader>e", ":Oil<cr>")
 vim.keymap.set("n", "<leader>u", ":UndotreeToggle<cr>")
 vim.keymap.set("n", "<A-a>", "<cmd>Grapple toggle<cr>")
@@ -67,3 +76,4 @@ vim.keymap.set("n", "<S-g>", "<S-g>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
+
