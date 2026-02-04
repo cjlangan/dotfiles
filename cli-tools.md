@@ -11,7 +11,6 @@ neomutt
 wget
 curl
 nvim
-tgpt
 bat
 tlp
 gdu
@@ -19,7 +18,6 @@ gotop
 cava
 toipe
 yazi
-speedtest-cli
 bluetoothctl
 nmcli
 ffmpeg
@@ -28,7 +26,6 @@ ffplay
 cmus
 waydroid
 cbonsai
-tty-clock 
 arecord
 sptlrx
 hyprpicker
@@ -50,3 +47,7 @@ yt-x
 spotdl
 fum
 ncdu
+cloudflare-speed-cli
+rmpc
+impala
+wiremix
